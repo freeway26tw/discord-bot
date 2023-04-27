@@ -1,5 +1,5 @@
 require('dotenv').config()
-const { Client, IntentsBitField, EmbedBuilder } = require('discord.js')
+const { Client, IntentsBitField, ActivityType } = require('discord.js')
 
 const client = new Client({
   intents: [
@@ -10,36 +10,21 @@ const client = new Client({
   ]
 })
 
+let status = {
+  name: 'ASMR・森の音',
+  type: ActivityType.Streaming,
+  url: 'https://www.youtube.com/watch?v=HcMeAvf5-xo&ab_channel=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E5%85%AC%E5%BC%8FYouTube%E3%83%81%E3%83%A3%E3%83%B3%E3%83%8D%E3%83%AB'
+}
+
+
 client.on('ready', (c) => {
   console.log(`${c.user.tag} is online`)
+
+  client.user.setActivity(status)
 })
 
 client.on('interactionCreate', (interaction) => {
   if (!interaction.isChatInputCommand()) return
-
-  if (interaction.commandName === 'embed') {
-    const embed = new EmbedBuilder()
-      .setTitle('Embed title')
-      .setDescription('This is an embed description.')
-      .setColor('Random')
-      .addFields({
-        name: 'Field title',
-        value: 'Some random value',
-        inline: true,
-      },
-        {
-          name: 'Field title',
-          value: 'Some random value',
-          inline: true,
-        },
-        {
-          name: 'Field title',
-          value: 'Some random value',
-          inline: true,
-        })
-
-    interaction.reply({ embeds: [embed] })
-  }
 })
 
 client.on(`messageCreate`, (message) => {
