@@ -3,8 +3,30 @@ const { REST, Routes, ApplicationCommandOptionType } = require('discord.js')
 
 const commands = [
   {
-    name: 'embed',
-    description: 'Sends an embed!',
+    name: 'question',
+    description: 'Random question',
+    options: [
+      {
+        name: 'type',
+        description: 'Frontend/Backend/Javascript',
+        type: ApplicationCommandOptionType.String,
+        choices: [
+          {
+            name: '前端',
+            value: 'Frontend',
+          },
+          {
+            name: '後端',
+            value: 'Backend',
+          },
+          {
+            name: 'JS',
+            value: 'Javascript',
+          },
+        ],
+        required: true,
+      }
+    ],
   }
 ]
 

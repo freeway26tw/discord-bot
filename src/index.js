@@ -19,12 +19,17 @@ let status = {
 
 client.on('ready', (c) => {
   console.log(`${c.user.tag} is online`)
-
   client.user.setActivity(status)
 })
 
 client.on('interactionCreate', (interaction) => {
   if (!interaction.isChatInputCommand()) return
+
+  if (interaction.commandName === 'question') {
+    const type = interaction.options.get('type').value;
+
+    interaction.reply(`${type}`);
+  }
 })
 
 client.on(`messageCreate`, (message) => {
