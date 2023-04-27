@@ -14,13 +14,25 @@ client.on('ready', (c) => {
   console.log(`${c.user.tag} is online`)
 })
 
+client.on('interactionCreate', (interaction) => {
+  if (!interaction.isChatInputCommand()) return
+
+  if (interaction.commandName === 'hey') {
+    return interaction.reply('hey!')
+  }
+
+  if (interaction.commandName === 'ping') {
+    return interaction.reply('pong!')
+  }
+})
+
 client.on(`messageCreate`, (message) => {
   if (message.author.bot) {
     return
   }
 
-  if (message.content === 'hello') {
-    message.reply('Hey!')
+  if (message.content === '我想成為武林大師') {
+    message.reply(`既然你都誠心誠意地發問了，我就告訴你秘訣吧！https://www.youtube.com/watch?v=m_T25R1YBHI&ab_channel=WB%E7%99%BD%E9%B3%A5`)
   }
 })
 
