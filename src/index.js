@@ -1,6 +1,6 @@
 require('dotenv').config()
+const { question } = require('../helpers/question')
 const { Client, IntentsBitField, ActivityType } = require('discord.js')
-
 const client = new Client({
   intents: [
     IntentsBitField.Flags.Guilds,
@@ -22,13 +22,14 @@ client.on('ready', (c) => {
   client.user.setActivity(status)
 })
 
-client.on('interactionCreate', (interaction) => {
+client.on('interactionCreate', async (interaction) => {
   if (!interaction.isChatInputCommand()) return
 
   if (interaction.commandName === 'question') {
     const type = interaction.options.get('type').value;
-
-    interaction.reply(`${type}`);
+    const q = await question(type)
+    interaction.reply(`耿鬼我要來出題目了！
+請問「${q}」?`)
   }
 })
 
@@ -37,9 +38,10 @@ client.on(`messageCreate`, (message) => {
     return
   }
 
-  if (message.content === '我想成為武林大師') {
-    message.reply(`既然你都誠心誠意地發問了，我就告訴你秘訣吧！https://www.youtube.com/watch?v=m_T25R1YBHI&ab_channel=WB%E7%99%BD%E9%B3%A5`)
+  if (message.content.includes('耿鬼')) {
+    message.reply(`有人在呼叫我嗎 ><`)
   }
+
 })
 
 client.login(process.env.TOKEN)

@@ -13,15 +13,15 @@ const commands = [
         choices: [
           {
             name: '前端',
-            value: 'Frontend',
+            value: 'frontend',
           },
           {
             name: '後端',
-            value: 'Backend',
+            value: 'backend',
           },
           {
             name: 'JS',
-            value: 'Javascript',
+            value: 'javascript',
           },
         ],
         required: true,
