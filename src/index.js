@@ -28,17 +28,23 @@ client.on('interactionCreate', async (interaction) => {
   if (interaction.commandName === 'question') {
     const type = interaction.options.get('type').value;
     const q = await question(type)
-    interaction.reply(`耿鬼我要來出題目了！
+    const author = await interaction.member
+    interaction.reply(`你好啊 ${author}
+真沒想到你能到這裡來啊
+不過...也就到此為止了
+接下來就由耿鬼我出題目了
 請問「${q}」?`)
   }
 })
 
 client.on(`messageCreate`, (message) => {
-  if (message.author.bot) {
-    return
+  if (message.author.bot && message.content.includes('真沒想到你能到這裡來啊')) {
+    setTimeout(() => {
+      message.reply('相信大家都知道答案了吧 快~快說給我聽')
+    }, 5*60*1000);
   }
 
-  if (message.content.includes('耿鬼')) {
+  if (message.content.includes('耿鬼') && !message.author.bot) {
     message.reply(`有人在呼叫我嗎 ><`)
   }
 

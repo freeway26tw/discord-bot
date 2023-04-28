@@ -15,8 +15,7 @@ module.exports.question = async function (type) {
     )
   )
 
-  randomNumber = Math.floor(Math.random(titles.length))
-
+  randomNumber = Math.floor(Math.random() * titles.length)
   await browser.close()
   return titles[randomNumber]
 }
